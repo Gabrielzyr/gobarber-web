@@ -10,7 +10,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Background, Container, Content } from './styles';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 interface SignInFormData {
@@ -22,6 +23,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -38,7 +40,7 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
@@ -48,10 +50,14 @@ const SignIn: React.FC = () => {
 
           formRef.current?.setErrors(errors);
         }
-        // toast here
+        addToast({
+          type: 'error',
+          title: 'Erro na aplicação',
+          description: 'Ocorreu um erro ao fazer login, cheque as credencias.',
+        });
       }
     },
-    [signIn],
+    [signIn, addToast],
   );
 
   return (
