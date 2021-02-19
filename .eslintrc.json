@@ -25,7 +25,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
-
+    "camelcase": "off",
     "@typescript-eslint/ban-types": "warn",
     "react/jsx-props-no-spreading": "off",
     // "no-restricted-globals":"off",
