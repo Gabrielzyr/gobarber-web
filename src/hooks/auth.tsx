@@ -40,8 +40,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
     console.log(response);
 
-    const { token, mappedUser } = response.data;
-    const user = mappedUser;
+    const { token, user } = response.data;
     localStorage.setItem('@GoBarber:token', token);
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
 
