@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
       .then(response => {
         setMonthAvailability(response.data);
       });
-  }, [currentMonth, user]);
+  }, [currentMonth, user.id]);
 
   useEffect(() => {
     api
