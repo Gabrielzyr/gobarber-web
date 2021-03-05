@@ -30,6 +30,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
+    console.log(JSON.stringify(user));
 
     if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`;
@@ -54,6 +55,7 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
+    console.log(user);
 
     setData({ token, user });
   }, []);
@@ -68,6 +70,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const updateUser = useCallback(
     (user: User) => {
       localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
       setData({
         token: data.token,
         user,
